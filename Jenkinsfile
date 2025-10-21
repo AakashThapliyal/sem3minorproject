@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "aakashthapliyal/portfolio"
         CONTAINER_NAME = "portfolio-container"
+        HOST_PORT = "9090"  // Changed from 8080 to avoid conflict with Jenkins
     }
 
     stages {
@@ -24,7 +25,7 @@ pipeline {
                 bat '''
                 docker stop %CONTAINER_NAME% || echo "No existing container"
                 docker rm %CONTAINER_NAME% || echo "No existing container"
-                docker run -d -p 8080:80 --name %CONTAINER_NAME% %IMAGE_NAME%:latest
+                docker run -d -p 9090:80 --name %CONTAINER_NAME% %IMAGE_NAME%:latest
                 '''
             }
         }
